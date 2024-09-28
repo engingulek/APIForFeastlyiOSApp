@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.apiForFeastly.business.abstracts.KitchenService;
+import com.example.apiForFeastly.business.abstracts.RestaurantService;
 import com.example.apiForFeastly.core.results.Result;
 
 import lombok.AllArgsConstructor;
@@ -20,8 +21,16 @@ public class ApiController {
     @Autowired
     private  KitchenService kitchenService;
 
+    @Autowired
+    private  RestaurantService restaurantService;
+
     @GetMapping("kitchen/getAll")
     public ResponseEntity<Result> kitchenFindAll(){
         return  kitchenService.findAll();
+    }
+
+    @GetMapping("restaurant/getAll")
+    public ResponseEntity<Result> restaurantFindAll(){
+        return  restaurantService.findAll();
     }
 }
