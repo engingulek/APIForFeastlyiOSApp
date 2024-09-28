@@ -31,10 +31,12 @@ public class KitchenManager implements  KitchenService {
         List<Kitchen> kitches = kitchenRepository.findAll();
         
 
-        List<GetKitchenResponse> getKitchenResponses = kitches.stream().map(item -> this.modelMapperService.forResponse()
+        List<GetKitchenResponse> getKitchenResponses = kitches.stream()
+        .map(item -> this.modelMapperService.forResponse()
         .map(item, GetKitchenResponse.class)).collect(Collectors.toList());
 
         return  ResponseEntity.ok(new SuccessDataResult<>(getKitchenResponses,true,"fetch success"));
     }
+
     
 }
