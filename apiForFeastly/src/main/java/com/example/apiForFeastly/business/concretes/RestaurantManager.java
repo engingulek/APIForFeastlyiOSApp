@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.example.apiForFeastly.business.abstracts.RestaurantService;
 import com.example.apiForFeastly.core.mapper.ModelMapperService;
 import com.example.apiForFeastly.core.response.GetKitchenForRestaurant;
+import com.example.apiForFeastly.core.response.GetRestaurantDetailResponse;
 import com.example.apiForFeastly.core.response.GetRestaurantResponse;
 import com.example.apiForFeastly.core.results.Result;
 import com.example.apiForFeastly.core.results.SuccessDataResult;
@@ -92,6 +93,32 @@ public class RestaurantManager implements RestaurantService {
         Set<GetRestaurantResponse> resultSet = new HashSet<>(getRestaurantResponses);
         List<GetRestaurantResponse> resultList = new ArrayList<>(resultSet);
         return  ResponseEntity.ok(new SuccessDataResult<>(resultList,true,"fetch success"));
+    }
+
+
+
+    @Override
+    public ResponseEntity<Result> findRestaurantDetail(String id) {
+        Restaurant restaurant = restaurantRepository.findById(id).orElseThrow();
+
+        List<Kitchen> kitchens = kitchenRepository.findByIdIn(restaurant.getKitchens());
+        List<GetKitchenForRestaurant> getKitchenResponses = kitchens.stream()
+        .map(item -> this.modelMapperService.forResponse()
+        .map(item, GetKitchenForRestaurant.class)).collect(Collectors.toList());
+
+        GetRestaurantDetailResponse getRestaurantDetailResponse = new GetRestaurantDetailResponse();
+        getRestaurantDetailResponse.setId(restaurant.getId());
+        getRestaurantDetailResponse.setName(restaurant.getName());
+        getRestaurantDetailResponse.setKitchens(getKitchenResponses);
+        getRestaurantDetailResponse.setImageUrl(restaurant.getImageUrl());
+        getRestaurantDetailResponse.setLatitude(restaurant.getLatitude());
+        getRestaurantDetailResponse.setLongitude( restaurant.getLongitude());
+        getRestaurantDetailResponse.setMinWage(restaurant.getMinWage());
+        getRestaurantDetailResponse.setMenus(restaurant.getMenus());
+
+        
+
+        return  ResponseEntity.ok(new SuccessDataResult<>(getRestaurantDetailResponse,true,"fetch success"));
     }
 
   

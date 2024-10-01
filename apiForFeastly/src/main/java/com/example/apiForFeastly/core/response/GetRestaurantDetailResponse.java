@@ -1,9 +1,7 @@
-package com.example.apiForFeastly.entity;
-
+package com.example.apiForFeastly.core.response;
 import java.util.List;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import com.example.apiForFeastly.entity.Menu;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,19 +10,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
-@Document(collection = "restaurants")
-public class Restaurant {
-    @Id
+@AllArgsConstructor
+@NoArgsConstructor
+public class GetRestaurantDetailResponse {
     private String id;
-
     private String name;
-
-    private List<String> kitchens;
-
+    private List<GetKitchenForRestaurant> kitchens;
     private String imageUrl;
 
     private Double latitude;
@@ -33,5 +26,5 @@ public class Restaurant {
 
     private int minWage;
 
-   private List<Menu> menus;
+    private List<Menu> menus;
 }

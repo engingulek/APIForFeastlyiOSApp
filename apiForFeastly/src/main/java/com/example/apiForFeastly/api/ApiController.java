@@ -42,4 +42,9 @@ public class ApiController {
     public ResponseEntity<Result> restaurantFilterByKitchen(@RequestBody @Validated  FilterRequest selectedList){
         return restaurantService.restaurantFilterByKitchen(selectedList.getList());
     }
+    
+    @GetMapping ("restaurant/detail")
+    public ResponseEntity<Result> getRestaurantDetail(String id){
+        return restaurantService.findRestaurantDetail(id);
+    }
 }
