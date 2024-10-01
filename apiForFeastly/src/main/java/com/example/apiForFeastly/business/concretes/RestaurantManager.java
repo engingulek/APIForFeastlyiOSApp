@@ -114,6 +114,8 @@ public class RestaurantManager implements RestaurantService {
         getRestaurantDetailResponse.setLatitude(restaurant.getLatitude());
         getRestaurantDetailResponse.setLongitude( restaurant.getLongitude());
         getRestaurantDetailResponse.setMinWage(restaurant.getMinWage());
+        getRestaurantDetailResponse.setService(restaurant.getService());
+        getRestaurantDetailResponse.setFlavor(restaurant.getFlavor());
         getRestaurantDetailResponse.setMenus(restaurant.getMenus());
 
         

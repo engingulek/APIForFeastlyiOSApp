@@ -32,6 +32,8 @@ public class Restaurant {
     private Double longitude;
 
     private int minWage;
+    private int service;
+    private  int flavor;
 
    private List<Menu> menus;
 }
